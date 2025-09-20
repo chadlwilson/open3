@@ -78,7 +78,9 @@ module Open3
 
     builder = ProcessBuilder.new(cmd.to_java(:string))
 
-    builder.directory(java.io.File.new(opts[:chdir] || Dir.pwd))
+    directory = opts[:chdir] || Dir.pwd
+    directory = directory.to_path if directory.respond_to?(:to_path)
+    builder.directory(java.io.File.new(directory))
 
     environment = builder.environment
     env.each { |k, v| v.nil? ? environment.remove(k) : environment.put(k, v) }
