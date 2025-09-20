@@ -184,6 +184,13 @@ class TestOpen3 < Test::Unit::TestCase
     assert(s.success?)
   end
 
+  def test_capture3_chdir_pathname
+    o, e, s = Open3.capture3(RUBY, '-e', '', :chdir=>Pathname.new('.'))
+    assert_equal("", o)
+    assert_equal("", e)
+    assert(s.success?)
+  end
+
   def test_capture2
     o, s = Open3.capture2(RUBY, '-e', 'i=STDIN.read; print i+"o"', :stdin_data=>"i")
     assert_equal("io", o)
