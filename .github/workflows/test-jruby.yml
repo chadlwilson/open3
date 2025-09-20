@@ -1,4 +1,4 @@
-name: test
+name: test-jruby
 
 on: [push, pull_request]
 
@@ -7,8 +7,8 @@ jobs:
     name: build (${{ matrix.ruby }} / ${{ matrix.os }})
     strategy:
       matrix:
-        ruby: [ 2.7, 2.6, head, jruby-9.3 ]
-        os: [ ubuntu-latest, macos-latest ]
+        ruby: [ jruby-9.3, jruby-9.4, jruby-10.0, jruby-head ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v5
